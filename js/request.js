@@ -51,7 +51,7 @@ function initRequest() {
   const rLrn = $("#rLrn");
   if (rLrn) {
     rLrn.addEventListener("input", () => {
-      const digits = rLrn.value.replace(/\D/g, "").slice(0, 9);
+      const digits = rLrn.value.replace(/\D/g, "").slice(0, 12);
       if (rLrn.value !== digits) rLrn.value = digits;
     });
   }
@@ -111,7 +111,7 @@ function validateReqStep(step) {
   const val = (id) => (($(id) && $(id).value) || "").trim();
   if (step === 0) {
     if (!val("#rName")) return "Please enter the student's full name.";
-    if (!/^\d{9}$/.test(val("#rLrn"))) return "Please enter a valid 9-digit LRN.";
+    if (!/^\d{12}$/.test(val("#rLrn"))) return "Please enter a valid 12-digit LRN.";
     if (!/^\S+@\S+\.\S+$/.test(val("#rEmail"))) return "Please enter a valid email address.";
     if (!$("#rGrade").value) return "Please choose the grade level.";
   }
