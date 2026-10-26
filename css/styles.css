@@ -48,7 +48,8 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 16px/1.55 "IBM Plex Sans", system-ui, sans-serif
+  font: 16px/1.55 "IBM Plex Sans", system-ui, sans-serif;
+  overflow-x: clip
 }
 
 h1, h2, h3, .serif {
@@ -195,7 +196,8 @@ nav a.on {
 .hero {
   background: linear-gradient(135deg, var(--navy), var(--navy2));
   color: #fff;
-  padding: 56px 20px
+  padding: 56px 20px;
+  overflow: hidden
 }
 
 .wrap {
@@ -676,6 +678,7 @@ footer {
 .icon-btn {
   width: 38px;
   height: 38px;
+  flex: none;
   padding: 0;
   border-radius: 50%;
   display: inline-grid;
@@ -988,6 +991,11 @@ nav a span { display: inline-block; width: 22px }
 .toast.out { opacity: 0; transform: translateY(8px); transition: .2s }
 .toast-msg { flex: 1; line-height: 1.45 }
 .toast-x {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
   background: none;
   border: 0;
   padding: 0;
@@ -1390,6 +1398,7 @@ nav a span { display: inline-block; width: 22px }
 }
 
 .doc-card:hover { border-color: var(--gold); transform: translateY(-1px); background: var(--bg) }
+.doc-card > div:nth-child(2) { flex: 1; min-width: 0 }
 .doc-card b { display: block; font-size: .9rem }
 .doc-card small { display: block; color: var(--mut); font-size: .78rem; line-height: 1.4 }
 .doc-ico { font-size: 1.2rem; line-height: 1.2 }
@@ -1407,7 +1416,7 @@ nav a span { display: inline-block; width: 22px }
 .staff-card:hover { border-color: var(--gold); transform: translateY(-2px) }
 .staff-card .avatar { margin-bottom: 10px }
 .staff-role { display: block; color: var(--mut); font-size: .84rem; font-weight: 500; margin: 2px 0 6px }
-.staff-mail { font-size: .76rem; color: var(--mu t, var(--mut)); word-break: break-all }
+.staff-mail { font-size: .76rem; color: var(--mut); word-break: break-all }
 
 .staff-modal-top { display: flex; gap: 14px; align-items: center; margin-bottom: 18px }
 
@@ -1833,4 +1842,110 @@ kbd {
   .timeline .tl-row { padding: 9px 0 }
   .staff-mail { word-break: break-word }
   .ann .chev { display: none }
+}
+
+/* ---------- Phone layout (360–640px) ---------- */
+@media(max-width:640px) {
+  section.s { padding: 32px 0 }
+  .wrap { padding: 0 16px }
+  .hero { padding: 38px 0 }
+  .hero .wrap { padding: 0 16px; gap: 26px }
+  .hero h2 { font-size: clamp(1.9rem, 9vw, 2.6rem); margin: 14px 0 12px }
+  .hero p { font-size: .95rem }
+  .hero .btns { gap: 9px; margin-top: 18px }
+  .hero .btns button { flex: 1 1 100%; min-height: 46px }
+  .slip { transform: none; padding: 18px }
+  .slip h3 { font-size: 1.15rem }
+
+  header { padding: 10px 12px; gap: 10px }
+  .burger, .logo { width: 42px; height: 42px; flex: none }
+  header h1 { font-size: 1.05rem; line-height: 1.2 }
+  header .mono { font-size: .6rem; letter-spacing: .04em }
+  .auth { gap: 6px }
+  .auth button { min-height: 38px }
+  .auth .out, .auth #signBtn { padding: 7px 11px; font-size: .82rem }
+  .auth #who { display: none }
+
+  .row { flex-wrap: wrap; align-items: flex-start; gap: 6px }
+  .row a { white-space: normal }
+  .section-lead { margin: -4px 0 20px }
+  .card, .dark { padding: 18px; border-radius: 14px }
+  .band { padding: 20px; border-radius: 16px }
+  .band .docs div { flex-wrap: wrap; gap: 4px 10px; padding: 12px 14px }
+
+  .ann { gap: 12px; align-items: flex-start }
+  .dt { min-width: 54px; padding: 5px }
+  .ann h3 { font-size: 1rem }
+  .ann p { font-size: .88rem }
+  .ann .tag { align-self: flex-start }
+
+  .doc-card { padding: 11px }
+  .doc-time { font-size: .82rem }
+
+  .toolbar input { min-width: 0 }
+  .list-meta { flex-wrap: wrap }
+  .fact-list > div { flex-wrap: wrap }
+  .cal-legend { flex-wrap: wrap }
+  .contact-lines { overflow-wrap: anywhere }
+  .contact-lines a { word-break: break-word }
+  .staff { grid-template-columns: 1fr }
+  .stats-cards { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .acc-body { padding-left: 16px }
+
+  .admin-item { flex-wrap: wrap }
+  .admin-item .info { flex: 1 1 100% }
+  .admin-item .actions { width: 100% }
+  .admin-item .actions button { flex: 1 1 auto }
+  .admin-bar { padding: 12px 14px }
+  .msg-head { flex-wrap: wrap }
+  .admin-req-main { min-width: 0; flex: 1 1 100% }
+  .admin-req .actions { width: 100% }
+  .admin-req .actions button { flex: 1 1 auto }
+  .admin-tab { flex: 1 1 calc(33.333% - 6px); padding: 9px 8px; font-size: .82rem }
+  .admin-toolbar select, .admin-toolbar input { width: 100%; min-width: 0 }
+
+  .my-req { align-items: flex-start }
+  .my-req .status { flex: none }
+  .req-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px }
+  .review-box > div, .receipt-mini > div { padding: 9px 11px }
+  .ref-box b { font-size: 1.25rem }
+
+  .table-wrap { -webkit-overflow-scrolling: touch }
+  .table, .table tbody, .table tr, .table td { display: block; width: 100% }
+  .table thead { display: none }
+  .table tr { border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin-bottom: 10px; background: var(--bg) }
+  .table td { border: 0; padding: 5px 0 }
+  .table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font: 500 .66rem "IBM Plex Mono", monospace;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--mut);
+    margin-bottom: 1px
+  }
+  .table td.row-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center }
+  .table td.row-actions::before { flex-basis: 100% }
+  .row-actions button, .admin-req .actions button, .admin-item .actions button { min-height: 34px }
+  .cred button { min-height: 38px }
+  .link-btn { min-height: 30px; padding: 4px 0 }
+  #modal { width: 96vw; max-height: 90vh }
+  .modal-body { padding: 16px 14px }
+
+  footer { padding: 22px 16px }
+}
+
+@media(max-width:560px) {
+  .auth { flex: 1 1 100%; justify-content: flex-end; padding-top: 2px }
+}
+
+@media(max-width:420px) {
+  .hero h2 { font-size: 1.9rem }
+  .badge { font-size: .78rem }
+  .req-stepper { gap: 4px }
+  .req-step { padding: 5px 7px 5px 5px; font-size: .75rem }
+  .admin-tab { flex-basis: calc(50% - 6px) }
+  .stats-cards { grid-template-columns: 1fr }
+  .form-actions button { min-width: 0 }
+  .review-box b, .receipt-mini b { max-width: 60% }
 }

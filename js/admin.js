@@ -181,7 +181,7 @@ function openAdminRequest(ref) {
       "<div><small>Grade</small><b>" + esc(req.grade || "—") + "</b></div>" +
       "<div><small>Document</small><b>" + esc(req.document) + "</b></div>" +
       "<div><small>Copies</small><b>" + esc(req.copies) + "</b></div>" +
-      "<div><small>Processing</small><b>~" + (doc ? doc.days : "—") + " days</b></div>" +
+      "<div><small>Processing</small><b>" + (doc ? "~" + doc.days + " day" + (doc.days > 1 ? "s" : "") : "—") + "</b></div>" +
       "<div><small>Filed</small><b>" + formatDateTime(req.createdAt) + "</b></div>" +
       "<div><small>Updated</small><b>" + timeAgo(req.updatedAt) + "</b></div>" +
     "</div>" +
@@ -472,11 +472,11 @@ async function loadAdminUsers() {
     ADMIN_USERS = await api("/users");
     box.innerHTML = '<div class="table-wrap"><table class="table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Actions</th></tr></thead><tbody>' +
       ADMIN_USERS.map((u) => `<tr>
-        <td><div class="user-cell"><span class="avatar sm">${esc(initials(u.name))}</span><b>${esc(u.name)}</b></div></td>
-        <td>${esc(u.email)}</td>
-        <td><span class="tag ${u.role === "admin" ? "gold" : ""}">${u.role === "admin" ? "Admin" : "Student"}</span></td>
-        <td>${formatDate(u.createdAt)}</td>
-        <td class="row-actions">
+        <td data-label="Name"><div class="user-cell"><span class="avatar sm">${esc(initials(u.name))}</span><b>${esc(u.name)}</b></div></td>
+        <td data-label="Email">${esc(u.email)}</td>
+        <td data-label="Role"><span class="tag ${u.role === "admin" ? "gold" : ""}">${u.role === "admin" ? "Admin" : "Student"}</span></td>
+        <td data-label="Joined">${formatDate(u.createdAt)}</td>
+        <td class="row-actions" data-label="Actions">
           <button class="out btn-ink sm" onclick="toggleUserRole(${u.id}, '${u.role === "admin" ? "student" : "admin"}')">
             ${u.role === "admin" ? "Make student" : "Make admin"}
           </button>

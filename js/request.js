@@ -184,8 +184,8 @@ function showRequestSuccess(req) {
       <div><span>Student</span><b>${esc(req.name)}</b></div>
       <div><span>Document</span><b>${esc(req.document)}</b></div>
       <div><span>Copies</span><b>${esc(req.copies)}</b></div>
-      <div><span>Processing</span><b>~${doc ? doc.days : "—"} days</b></div>
-      <div><span>Status</span><b>${statusBadge("pending")}</b></div>
+      <div><span>Processing</span><b>${doc ? "~" + doc.days + " day" + (doc.days > 1 ? "s" : "") : "—"}</b></div>
+      <div><span>Status</span><b>${statusBadge(req.status || "pending")}</b></div>
     </div>
     <div class="form-actions">
       <button onclick="printCachedRequest('${esc(req.ref)}')">Print receipt</button>
@@ -255,7 +255,7 @@ function requestDetailHTML(req) {
       <div><small>LRN</small><b>${esc(req.lrn)}</b></div>
       <div><small>Document</small><b>${esc(req.document)}</b></div>
       <div><small>Copies</small><b>${esc(req.copies)}</b></div>
-      <div><small>Processing</small><b>~${doc ? doc.days : "—"} days</b></div>
+      <div><small>Processing</small><b>${doc ? "~" + doc.days + " day" + (doc.days > 1 ? "s" : "") : "—"}</b></div>
       <div><small>Filed</small><b>${formatDateTime(req.createdAt)}</b></div>
     </div>
     <div class="req-purpose"><small>Purpose</small><p>${esc(req.purpose)}</p></div>

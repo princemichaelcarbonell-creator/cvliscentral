@@ -52,10 +52,6 @@ const DOCS = [
     desc: "Permanent student record. Released only to the student or guardian." },
   { name: "Certificate of Enrollment", days: 1,
     desc: "Confirms that you are currently enrolled for the school year." },
-  { name: "Diploma / Transcript copy", days: 5,
-    desc: "Certified copy of your diploma or transcript of records." },
-  { name: "Certificate of Good Standing", days: 2,
-    desc: "States that you have no pending disciplinary issues." },
   { name: "Other / Special request", days: 3,
     desc: "Any other registrar document. Describe it in the purpose box." }
 ];
@@ -96,8 +92,7 @@ const ENROLL_DOCS = [
   ["card", "Report Card (Form 138)", "Latest report card, signed by the previous school", ["new", "transferee", "returning"]],
   ["sf10", "Form 137 / SF10", "Permanent record from your previous school", ["new", "transferee"]],
   ["moral", "Good Moral Certificate", "Issued by your previous school", ["transferee"]],
-  ["id", "2x2 ID Photo", "Plain background, recent photo (2 copies)", []],
-  ["good", "Certificate of Good Standing", "For returning students with a gap in enrollment", ["returning"]]
+  ["id", "2x2 ID Photo", "Plain background, recent photo (2 copies)", []]
 ];
 
 const ENROLL_OFFICE = "Registrar's Office, Camp Vicente Lim Integrated School, Brgy. Mayapa, Calamba City";
