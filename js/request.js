@@ -27,7 +27,11 @@ function initRequest() {
   const newReq = $("#newReqBtn");
   const start = $("#startReqBtn");
 
-  if (next) next.onclick = () => reqGoStep(reqStep + 1);
+  if (next) next.onclick = () => {
+    const err = validateReqStep(reqStep);
+    if (err) { requestError(err); return; }
+    reqGoStep(reqStep + 1);
+  };
   if (prev) prev.onclick = () => reqGoStep(reqStep - 1);
   if (send) send.onclick = sendRequest;
   if (track) track.onclick = trackRequest;
@@ -44,6 +48,13 @@ function initRequest() {
   if (trackRef) trackRef.addEventListener("keydown", (e) => { if (e.key === "Enter") trackRequest(); });
   const trackEmail = $("#trackEmail");
   if (trackEmail) trackEmail.addEventListener("keydown", (e) => { if (e.key === "Enter") trackRequest(); });
+  const rLrn = $("#rLrn");
+  if (rLrn) {
+    rLrn.addEventListener("input", () => {
+      const digits = rLrn.value.replace(/\D/g, "").slice(0, 9);
+      if (rLrn.value !== digits) rLrn.value = digits;
+    });
+  }
 
   updateDocMeta();
   renderMyRequestsPlaceholder();
@@ -100,7 +111,7 @@ function validateReqStep(step) {
   const val = (id) => (($(id) && $(id).value) || "").trim();
   if (step === 0) {
     if (!val("#rName")) return "Please enter the student's full name.";
-    if (!/^[A-Za-z0-9-]{4,20}$/.test(val("#rLrn"))) return "Please enter a valid LRN (4–20 letters or numbers).";
+    if (!/^\d{9}$/.test(val("#rLrn"))) return "Please enter a valid 9-digit LRN.";
     if (!/^\S+@\S+\.\S+$/.test(val("#rEmail"))) return "Please enter a valid email address.";
     if (!$("#rGrade").value) return "Please choose the grade level.";
   }

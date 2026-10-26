@@ -44,7 +44,7 @@ const LocalAPI = (() => {
       events: DEFAULT_EVENTS.map((e, i) => ({ id: i + 1, month: e[0], day: e[1], title: e[2], place: e[3], time: e[4], createdAt: now() })),
       requests: [
         {
-          id: 1, ref: "CVL-2026-0001", userId: studentId, name: "Maria Santos", lrn: "107001230001",
+          id: 1, ref: "CVL-2026-0001", userId: studentId, name: "Maria Santos", lrn: "107001230",
           email: "student@cvlis.edu", phone: "09171234567", grade: "Grade 10",
           document: "Good Moral Certificate", copies: 1,
           purpose: "Requirement for a scholarship application", notes: "",
@@ -52,7 +52,7 @@ const LocalAPI = (() => {
           createdAt: "2026-10-20T08:30:00.000Z", updatedAt: "2026-10-22T09:00:00.000Z"
         },
         {
-          id: 2, ref: "CVL-2026-0002", userId: null, name: "Juan Dela Cruz", lrn: "107001230045",
+          id: 2, ref: "CVL-2026-0002", userId: null, name: "Juan Dela Cruz", lrn: "107001231",
           email: "juan@example.com", phone: "", grade: "Grade 12",
           document: "Form 137 / SF10", copies: 2,
           purpose: "College application requirement", notes: "Will pick up on a Friday.",
@@ -60,7 +60,7 @@ const LocalAPI = (() => {
           createdAt: "2026-10-23T10:15:00.000Z", updatedAt: "2026-10-24T13:20:00.000Z"
         },
         {
-          id: 3, ref: "CVL-2026-0003", userId: studentId, name: "Maria Santos", lrn: "107001230001",
+          id: 3, ref: "CVL-2026-0003", userId: studentId, name: "Maria Santos", lrn: "107001230",
           email: "student@cvlis.edu", phone: "09171234567", grade: "Grade 10",
           document: "Certificate of Enrollment", copies: 1,
           purpose: "ID application", notes: "",
@@ -536,7 +536,7 @@ const LocalAPI = (() => {
     const notes = String(body.notes || "").trim();
     if (!name || !lrn || !email || !doc || !purpose) throw new Error("Please fill in the required fields.");
     if (!emailOk(email)) throw new Error("Please enter a valid email address.");
-    if (!/^[A-Za-z0-9-]{4,20}$/.test(lrn)) throw new Error("Please enter a valid LRN (4–20 letters or numbers).");
+    if (!/^\d{9}$/.test(lrn)) throw new Error("Please enter a valid 9-digit LRN.");
     if (purpose.length < 5) throw new Error("Please describe the purpose (at least 5 characters).");
     if (purpose.length > 500 || notes.length > 500) throw new Error("One of the fields is too long.");
     return { name, lrn, email, phone, grade, document: doc, copies, purpose, notes };
